@@ -79,15 +79,16 @@ internal class MethodCallHandlerImpl(
             displayResult["yDpi"] = metrics.ydpi
             build["displayMetrics"] = displayResult
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                build["serialNumber"] = try {
-                    Build.getSerial()
-                } catch (ex: SecurityException) {
-                    Build.UNKNOWN
-                }
-            } else {
-                build["serialNumber"] = Build.SERIAL
-            }
+            // NOTE HACK #9991, https://github.com/fluttercommunity/plus_plugins/issues/1948
+            // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //     build["serialNumber"] = try {
+            //         Build.getSerial()
+            //     } catch (ex: SecurityException) {
+            //         Build.UNKNOWN
+            //     }
+            // } else {
+            //     build["serialNumber"] = Build.SERIAL
+            // }
 
             result.success(build)
         } else {
